@@ -488,8 +488,6 @@ def eval(epoch,dataloder,test='TestRad', accbOld=0, printImage=False):
     correctTotal=0.0
     startind = 0
     endind = startind + 10
-    bigestfalseEnd = -1
-    smallestfalseEnd = 10000
     test_loss = []
     test_lossEx=[]
     test_std = []
@@ -660,8 +658,6 @@ def eval(epoch,dataloder,test='TestRad', accbOld=0, printImage=False):
     maxcor=0
     maxcorex=0
     for indc in range(0,len(correctList)):
-
-        print('Test set: biggest error: {:.4d}, smallest error: {:.4d}', bigestfalseEnd, smallestfalseEnd)
 
         # add informations to tensorboard
         writer.add_scalar(test + '/Average lossEx' +str(indc), test_lossEx[indc] / len(dataloder.dataset), epoch)
