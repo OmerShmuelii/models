@@ -7,34 +7,28 @@ author baiyu
 """
 
 import os
-import sys
+
 import argparse
-from datetime import datetime
+
 from statistics import mean as avmean
 import numpy as np
 import torch
 import torch.nn as nn
-import torch.optim as optim
+
 import math
-from torch.utils.data import DataLoader
-# from dataset import *
+
 from torch.autograd import Variable
 
 from tensorboardX import SummaryWriter
 
 from conf import settings
-from utils import get_network, get_training_dataloader, get_test_dataloader, WarmUpLR
-from models import resnext
+
 from models import efficientunet as efficientnet
-from dataProcessorLits import ImageList,ImageListSplit, Tuple
+
 import CustomDataLoaderGenerated as DP
-import albumentations as albu
-import segmentation_models_pytorch as smp
-import torchvision
+
 from torch.utils.data import DataLoader
-import cv2
-# from generate_new_scanSel import get_qmri_data_list  # OmerS' original script
-#from generate_new_scanfixMs import get_qmri_data_list  # ChenS' updated script 20210328
+
 from PIL import Image
 CUDA_LAUNCH_BLOCKING=1
 
