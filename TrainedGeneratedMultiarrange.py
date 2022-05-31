@@ -472,10 +472,11 @@ def collect_accuracy_satistics(correctExist,countAllV,labels,indc,accuracyPerDif
         correctex[indc] += correctExist.sum()
         correctList[indc] = correct[indc]
         correctexList[indc] = correctex[indc]
-    indc += 1
-    if indc == len(outputs):
+    if (indc+1) == len(outputs):
         correctTotal += (correctLabelsTotal > len(outputs) // 2).sum()
         correctExistTotal += (correctExistLabTotal > len(outputs) // 2).sum()
+    return correctLabelsTotal, correctExistLabTotal, correctTotal, correctExistTotal
+
 
 
 def eval(epoch,dataloder,test='TestRad', accbOld=0, printImage=False):
@@ -594,11 +595,12 @@ def eval(epoch,dataloder,test='TestRad', accbOld=0, printImage=False):
                                 org.save(
                                     'ImagesRadGO/' + str(lab) + '/' + str(iscorrect) + '/' + str(epoch) + '_' + str(batch_index) + '_' + str(i) + 'org.tiff')
 
-                collect_accuracy_satistics(correctExist, countAllV, labels, indc, accuracyPerDifficulty,
+                correctLabelsTotal, correctExistLabTotal,correctTotal, correctExistTotal=collect_accuracy_satistics(correctExist, countAllV, labels, indc, accuracyPerDifficulty,
                                            countPerDifficulty, correctLabels, correctLabelsTotal, correctExistLabTotal,
                                            outputs, correctList, correct, correctex, correctexList, PositiveList,
                                            NegativeList, Positivesumpleslst, Negativesumpleslist, correctTotal,
                                            correctExistTotal)
+                indc +=1
 
 
 
