@@ -743,13 +743,12 @@ def get_dataset():
     cifar100_training_loader = DP.Dataset(
         train_dir + '/train2',  #
 
-        'T2',  # 'All',#'T1c',#'Flair',#
-        'LABEL',
+
         split='train2',
         train_dirr=train_dir,
 
-        batch_size=args.b, shuffle=args.s, num_batches=20,
-        num_workers=args.w, pin_memory=False, finalSize=256, multi=1, sever_per_arr=(18, 21, 25, 30, 35), TST_flag=True,
+        batch_size=args.b, shuffle=args.s,
+        finalSize=256, multi=1, sever_per_arr=(18, 21, 25, 30, 35), TST_flag=True,
         ref_flg=True)  # 15, 18,
     train_dataloder = DataLoader(cifar100_training_loader, args.b, args.s)
 
@@ -757,40 +756,36 @@ def get_dataset():
     cifar100_training_loader = DP.Dataset(
         train_dir + '/train',  #
 
-        'T2',  # 'All',#'T1c',#'Flair',#
-        'LABEL',
+
         split='train',
         train_dirr=train_dir,
         # augmentation=DP.get_training_augmentation(),
         # preprocessing=DP.get_preprocessing(preprocessing_fn),
-        batch_size=args.b, shuffle=args.s, num_batches=20,
-        num_workers=args.w, pin_memory=False, finalSize=256, multi=1,
+        batch_size=args.b, shuffle=args.s,
+        finalSize=256, multi=1,
         sever_per_arr=(18, 21, 25, 30, 35))  # 15, 18,, 35, 41, 45
     train_dataloder3 = DataLoader(cifar100_training_loader, args.b, args.s)
 
     cifar100_training_loader2 = DP.Dataset(
         'MS_Data//train',  #
 
-        'T2',  # 'All',#'T1c',#'Flair',#
-        'LABEL',
+
         split='train',
         # augmentation=DP.get_training_augmentation(),
         # preprocessing=DP.get_preprocessing(preprocessing_fn),
-        batch_size=args.b, shuffle=args.s, num_batches=20,
-        num_workers=args.w, pin_memory=False, finalSize=256, ms__flg=True, gpu=True,
+        batch_size=args.b, shuffle=args.s,
+          finalSize=256, ms__flg=True, gpu=True,
         train_dirr='MS_Data')  # sever_per_arr=(0, 21, 25, 30) # #(0, 21, 25, 30), #(0, 6, 59, 12), #(0, 6, 9, 12, 15, 18, 21, 25, 30)
     train_dataloder2 = DataLoader(cifar100_training_loader2, args.b, args.s)
 
     TesterRad = DP.Dataset(
         'HT_RData',
 
-        'T2',  # 'T1c',#'ALL',#'T1c',#'T2',
-        'LABEL',
         split='',
         # augmentation=DP.get_training_augmentation(),
         # preprocessing=DP.get_preprocessing(preprocessing_fn),
-        batch_size=args.b, shuffle=False, num_batches=20,
-        num_workers=args.w, pin_memory=False, finalSize=256, multi=1, gpu=True, train_dirr='HT_RData',
+        batch_size=args.b, shuffle=False,
+          finalSize=256, multi=1, gpu=True, train_dirr='HT_RData',
         TST_flag=True)
 
     TesterRad_dataloder = DataLoader(TesterRad, args.b, False)
@@ -798,14 +793,12 @@ def get_dataset():
     valRad = DP.Dataset(
         train_dir + '/val2',  #
 
-        'T2',  # 'All',#'T1c',#'Flair',#
-        'LABEL',
         split='val2',
         train_dirr=train_dir,
         # augmentation=DP.get_training_augmentation(),
         # preprocessing=DP.get_preprocessing(preprocessing_fn),
-        batch_size=args.b, shuffle=args.s, num_batches=20,
-        num_workers=args.w, pin_memory=False, finalSize=256, multi=1,
+        batch_size=args.b, shuffle=args.s,
+          finalSize=256, multi=1,
         sever_per_arr=(0, 6, 9, 12, 15, 18, 21, 25, 30), prob=0.5,
         TST_flag=True, ref_flg=True)  # 15, 18,
 
@@ -905,7 +898,7 @@ if __name__ == '__main__':
                         'optimizer_state_dict': optimizer.state_dict(),
                         'best_accval': acc
                     }, checkpoint_path.format(net=args.net, epoch=epoch, type='bacc'))
-                best_accval = acc.item()
+                best_accval = acc
                 print("Best acc")
                 print(best_accval)
                 continue
